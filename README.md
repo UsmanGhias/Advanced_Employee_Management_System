@@ -1,9 +1,6 @@
-Here's the updated README with the project renamed to EMPS:
-
-```markdown
 # EMPS: Employee Management and Productivity Suite
 
-EMPS is a Workforce Productivity Suite built using Django, designed to streamline HR and office management processes within your organization. This project allows CEOs, Managers, and Employees to manage various aspects of HR, including employee information, attendance, feedback, and leave requests.
+EMPS is a Workforce Productivity Suite built using Django, designed to streamline HR and office management processes within your organization. This project allows CEOs, Managers, and Employees to manage various aspects of HR, including employee information, attendance, feedback, and leave requests. This Project is Created by Usman Ghias following Gaurav, Youtube, GitHub, Google Chrome and Chatgpt
 
 ## Introduction
 
@@ -51,10 +48,6 @@ For Employee:
 - **Request Leave:** Submit leave requests to the CEO, ensuring seamless time-off management.
 - **Connect with CEO:** Employees can provide feedback and share important concerns with the CEO, fostering a culture of open communication.
 
-## Screenshots
-
-Screenshots of the application can be found [here](/visuals/ss/).
-
 ## Installation
 
 To set up this project on your local machine, follow these steps:
@@ -91,10 +84,3 @@ python manage.py runserver
 ## Contributing
 
 Contributions are welcome! If you'd like to contribute to EMPS, feel free to open a pull request. We value your input and appreciate your help in making the app even better.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE.txt).
-```
-
-Please replace `[emps.onrender.com](https://emps.onrender.com/)` with the actual URL where your project will be deployed. If you need further modifications or have any other requests, feel free to let me know!
