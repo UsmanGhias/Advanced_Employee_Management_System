@@ -8,7 +8,7 @@ EMPS is a powerful Employee Management and Productivity Suite built using Django
 
 ## Deployed Website
 
-You can access the deployed EMPS website at [emps.onrender.com](https://emps.onrender.com/).
+You can access the deployed EMPS website at [emps.onrender.com](https://officeops.onrender.com/).
 
 ## Default Credentials
 
@@ -23,6 +23,9 @@ For Manager:
 For Employee:
 - Email: employee@employee.com
 - Password: employee
+  
+# Screen Shots
+Screenshots of the application can be found [here](/visuals/ss/).
 
 ## Features
 
