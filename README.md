@@ -57,7 +57,7 @@ To set up this project on your local machine, follow these steps:
 
 1. Clone the repository:
 ```
-git clone https://github.com/Gaurav241/EMPS.git
+git clone https://github.com/UsmanGhias/Advanced_Employee_Management_System.git
 ```
 2. Create a virtual environment and activate it:
 ```
