@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced_Employee_Management_System - Usman Ghias</title>
+  <meta name="description" content="EMPS is a Workforce Productivity Suite built using Django, designed to streamline HR and o">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #090d16;
+      --bg-card: #111827;
+      --bg-card-hover: #1f2937;
+      --border-subtle: #1e293b;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --accent: #38bdf8;
+      --accent-hover: #0284c7;
+      --code-bg: #030712;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.65;
+      font-size: 16px;
+      padding-bottom: 60px;
+    }
+    header.site-header {
+      background: rgba(17, 24, 39, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .header-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header-logo {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text-main);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .header-logo span {
+      color: var(--accent);
+    }
+    .header-links {
+      display: flex;
+      gap: 16px;
+    }
+    .header-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+    .header-links a:hover {
+      color: var(--text-main);
+    }
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 36px 24px;
+    }
+    .hero {
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 32px;
+      margin-bottom: 36px;
+    }
+    .meta-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #94a3b8;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    .badge.lang {
+      color: var(--accent);
+      border-color: rgba(56, 189, 248, 0.3);
+      background: rgba(56, 189, 248, 0.08);
+    }
+    .badge.type {
+      color: #a78bfa;
+      border-color: rgba(167, 139, 250, 0.3);
+      background: rgba(167, 139, 250, 0.08);
+    }
+    h1.project-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+    p.project-desc {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 780px;
+      margin-bottom: 24px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 18px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #090d16;
+    }
+    .btn-primary:hover {
+      background: #7dd3fc;
+    }
+    .btn-secondary {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+    }
+    .btn-secondary:hover {
+      background: var(--bg-card-hover);
+      border-color: #334155;
+    }
+    .content-area {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 36px 40px;
+    }
+    .content-area h1, .content-area h2, .content-area h3, .content-area h4 {
+      color: #ffffff;
+      margin-top: 1.8rem;
+      margin-bottom: 0.9rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .content-area h1 { font-size: 1.6rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px; }
+    .content-area h2 { font-size: 1.35rem; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 6px; }
+    .content-area h3 { font-size: 1.15rem; }
+    .content-area p {
+      margin-bottom: 1.1rem;
+      color: #d1d5db;
+    }
+    .content-area ul, .content-area ol {
+      margin-bottom: 1.2rem;
+      padding-left: 24px;
+      color: #d1d5db;
+    }
+    .content-area li {
+      margin-bottom: 6px;
+    }
+    .content-area pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 16px;
+      overflow-x: auto;
+      margin-bottom: 1.4rem;
+    }
+    .content-area code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9em;
+      background: rgba(255, 255, 255, 0.07);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #7dd3fc;
+    }
+    .content-area pre code {
+      background: transparent;
+      padding: 0;
+      border-radius: 0;
+      color: #e5e7eb;
+    }
+    .content-area blockquote {
+      border-left: 3px solid var(--accent);
+      padding-left: 16px;
+      margin: 1.2rem 0;
+      color: #9ca3af;
+      font-style: italic;
+    }
+    .content-area table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.4rem;
+    }
+    .content-area th, .content-area td {
+      padding: 10px 14px;
+      border: 1px solid var(--border-subtle);
+      text-align: left;
+    }
+    .content-area th {
+      background: #1f2937;
+      color: #ffffff;
+      font-weight: 600;
+    }
+    .content-area img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid var(--border-subtle);
+      margin: 12px 0;
+    }
+    footer.site-footer {
+      margin-top: 60px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+    footer.site-footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    footer.site-footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="https://usmanghias.github.io/Portfolio/" class="header-logo">Usman <span>Ghias</span></a>
+      <div class="header-links">
+        <a href="https://github.com/UsmanGhias/Advanced_Employee_Management_System" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://usmanghias.github.io/Portfolio/" target="_blank" rel="noopener">Portfolio</a>
+        <a href="https://codcrafters.org" target="_blank" rel="noopener">CODCrafters</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="meta-badges">
+        <span class="badge lang">JavaScript</span>
+        <span class="badge ">Open Source</span>
+        
+        <span class="badge">Branch: main</span>
+      </div>
+      <h1 class="project-title">Advanced_Employee_Management_System</h1>
+      <p class="project-desc">EMPS is a Workforce Productivity Suite built using Django, designed to streamline HR and o</p>
+      <div class="hero-actions">
+        <a href="https://github.com/UsmanGhias/Advanced_Employee_Management_System" class="btn btn-primary" target="_blank" rel="noopener">View on GitHub</a>
+        <a href="https://github.com/UsmanGhias/Advanced_Employee_Management_System/issues" class="btn btn-secondary" target="_blank" rel="noopener">Issues & Feedback</a>
+      </div>
+    </section>
+
+    <article class="content-area">
+      <h1 id="emps-employee-management-and-productivity-suite">EMPS: Employee Management and Productivity Suite</h1>
+<p>EMPS is a Workforce Productivity Suite built using Django, designed to streamline HR and office management processes within your organization. This project allows CEOs, Managers, and Employees to manage various aspects of HR, including employee information, attendance, feedback, and leave requests. This Project is Created by Usman Ghias following Gaurav, Youtube, GitHub, Google Chrome and Chatgpt</p>
+<h2 id="introduction">Introduction</h2>
+<p>EMPS is a powerful Employee Management and Productivity Suite built using Django, designed to streamline HR and office management processes within your organization. This project allows CEOs, Managers, and Employees to manage various aspects of HR, including employee information, attendance, feedback, and leave requests.</p>
+<h2 id="deployed-website">Deployed Website</h2>
+<p>You can access the deployed EMPS website at <a href="https://officeops.onrender.com/">emps.onrender.com</a>.</p>
+<h2 id="default-credentials">Default Credentials</h2>
+<p>For CEO:
+- Email: admin@admin.com
+- Password: admin</p>
+<p>For Manager:
+- Email: manager@manager.com
+- Password: manager</p>
+<p>For Employee:
+- Email: employee@employee.com
+- Password: employee</p>
+<h1 id="screen-shots">Screen Shots</h1>
+<p>Screenshots of the application can be found <a href="/visuals/ss/">here</a>.</p>
+<h2 id="features">Features</h2>
+<h3 id="ceo-can">CEO Can:</h3>
+<ul>
+<li><strong>Manage Your Team:</strong> CEOs have full control to add, update, and remove Managers and Employees within the organization.</li>
+<li><strong>Organize Company Structure:</strong> CEOs can create and manage Divisions and Departments to structure the company efficiently.</li>
+<li><strong>Track Employee Attendance:</strong> Monitor employee attendance to ensure a productive workforce.</li>
+<li><strong>Engage with Feedback:</strong> Review and respond to feedback from both employees and managers to foster a collaborative workplace.</li>
+<li><strong>Manage Leave Requests:</strong> Approve or reject leave requests from Managers and Employees, ensuring operational continuity.</li>
+</ul>
+<h3 id="manager-can">Manager Can:</h3>
+<ul>
+<li><strong>Maintain Attendance:</strong> Managers can record and update employee attendance, making it easier to track team productivity.</li>
+<li><strong>Handle Salaries:</strong> Add or update salary information for employees, streamlining payroll processes.</li>
+<li><strong>Apply for Leave:</strong> Managers can request time off and have it reviewed by the CEO.</li>
+<li><strong>Communicate with CEO:</strong> Managers can share feedback and important information directly with the CEO.</li>
+</ul>
+<h3 id="employee-can">Employee Can:</h3>
+<ul>
+<li><strong>Check Attendance:</strong> Employees can view their attendance records to stay on top of their work hours.</li>
+<li><strong>Access Salary Information:</strong> Check salary details for transparency and financial planning.</li>
+<li><strong>Request Leave:</strong> Submit leave requests to the CEO, ensuring seamless time-off management.</li>
+<li><strong>Connect with CEO:</strong> Employees can provide feedback and share important concerns with the CEO, fostering a culture of open communication.</li>
+</ul>
+<h2 id="installation">Installation</h2>
+<p>To set up this project on your local machine, follow these steps:</p>
+<ol>
+<li>Clone the repository:</li>
+</ol>
+<pre><code>git clone https://github.com/UsmanGhias/Advanced_Employee_Management_System.git
+</code></pre>
+<ol>
+<li>Create a virtual environment and activate it:</li>
+</ol>
+<pre><code>python -m venv venv
+venv\Scripts\activate
+</code></pre>
+<ol>
+<li>Navigate to the project directory and install dependencies:</li>
+</ol>
+<pre><code>cd EMPS
+pip install -r requirements.txt
+</code></pre>
+<ol>
+<li>Configure the database settings in settings.py and run migrations:</li>
+</ol>
+<pre><code>python manage.py makemigrations main_app
+python manage.py migrate
+</code></pre>
+<ol>
+<li>Create a superuser account:</li>
+</ol>
+<pre><code>python manage.py createsuperuser
+</code></pre>
+<ol>
+<li>Start the development server:</li>
+</ol>
+<pre><code>python manage.py runserver
+</code></pre>
+<ol>
+<li>Access the admin panel at http://localhost:8000/ and log in with the superuser credentials.</li>
+</ol>
+<h2 id="contributing">Contributing</h2>
+<p>Contributions are welcome! If you'd like to contribute to EMPS, feel free to open a pull request. We value your input and appreciate your help in making the app even better.</p>
+    </article>
+
+    <footer class="site-footer">
+      <p>Project documentation maintained by <a href="https://github.com/UsmanGhias">Usman Ghias</a>, Founder & Lead Architect at <a href="https://codcrafters.org">CODCrafters</a>.</p>
+    </footer>
+  </main>
+</body>
+</html>
